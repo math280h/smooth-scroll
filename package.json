@@ -1,6 +1,6 @@
 {
   "name": "light-smooth-scroll",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A very light smooth scroller used to scroll from elements to element",
   "main": "index.js",
   "scripts": {

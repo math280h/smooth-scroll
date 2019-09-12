@@ -7,10 +7,9 @@
  *  - Header: Target class or id to add offset for fixed header
  *  - Offset: Offset to add in pixels
  */
-function smoothScroller(options) {
+function SmoothScroller(options) {
     if (options.selector.charAt(0) === '#' || options.selector.charAt(0) === '.' && isString(options.selector)) {
         let targets = document.querySelectorAll(options.selector);
-
         if (targets.length > 0) {
             if (options.header === '' || !isString(options.header)) {
                 options.header = false;
@@ -27,17 +26,15 @@ function smoothScroller(options) {
                 });
             });
         } else {
-            throwError(`No objects found for smooth-scroll using selector: ${options.selector}`)
+            throw new Error(`No objects found for smooth-scroll using selector: ${options.selector}`)
         }
     } else {
-        throwError('Invalid selector for smooth-scroll')
+        throw new Error('Invalid selector for smooth-scroll')
     }
-
     function scrollToElm(elm, selector, header, definedOffset, behavior) {
         if (header) {
             let fixedHeader = document.getElementsByClassName(header);
             let topOfElement = document.getElementById(elm.target).offsetTop - (fixedHeader[0].clientHeight + definedOffset);
-
             if (behavior) {
                 window.scroll({
                     top: topOfElement,
@@ -48,10 +45,8 @@ function smoothScroller(options) {
                     top: topOfElement,
                 });
             }
-
         } else {
             let topOfElement = document.getElementById(elm.target).offsetTop - definedOffset;
-
             if (behavior) {
                 window.scroll({
                     top: topOfElement,
@@ -64,14 +59,9 @@ function smoothScroller(options) {
             }
         }
     }
-
-    function throwError(e) {
-        throw new Error(e);
-    }
-
     function isString(s) {
         return typeof s === 'string' || s instanceof String;
     }
 }
 
-module.exports.smoothScroller = smoothScroller;
+module.exports.SmoothScroller = SmoothScroller;
